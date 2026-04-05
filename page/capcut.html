@@ -24,10 +24,28 @@
       <li>HD export</li>
     </ul>
 
-    <a class="btn" href="YOUR_LINK">Download Now</a>
+    <!-- BUTTON -->
+    <a id="downloadBtn" class="btn" href="#">Download Now</a>
 
   </div>
 </div>
+
+<script>
+const btn = document.getElementById("downloadBtn");
+
+btn.addEventListener("click", function(e){
+  e.preventDefault();
+
+  btn.innerText = "Preparing...";
+  btn.classList.add("loading");
+
+  setTimeout(()=>{
+    window.open("YOUR_MEDIAFIRE_LINK", "_blank");
+    btn.innerText = "Download Now";
+    btn.classList.remove("loading");
+  }, 2000);
+});
+</script>
 
 </body>
 </html>
