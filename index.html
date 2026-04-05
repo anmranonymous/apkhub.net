@@ -783,193 +783,349 @@ footer{background:#020617;border-top:1px solid rgba(255,255,255,0.06);padding:60
 <div class="toast" id="toast"><span class="toast-icon">✅</span><span id="toast-msg">Done!</span></div>
 
 <script>
+
 // ===================== LOADER =====================
-window.addEventListener('load',()=>{
-  setTimeout(()=>{document.getElementById('loader').classList.add('done')},2000);
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var loader = document.getElementById('loader');
+    if (loader) loader.classList.add('done');
+  }, 2000);
 });
 
 // ===================== CURSOR =====================
-const cursor=document.getElementById('cursor');
-const trail=document.getElementById('cursorTrail');
-document.addEventListener('mousemove',e=>{
-  cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
-  setTimeout(()=>{trail.style.left=e.clientX+'px';trail.style.top=e.clientY+'px'},80);
-});
+var cursor = document.getElementById('cursor');
+var trail = document.getElementById('cursorTrail');
+if (cursor && trail) {
+  document.addEventListener('mousemove', function(e) {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(function() {
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+    }, 80);
+  });
+}
 
 // ===================== PARTICLES =====================
-const canvas=document.getElementById('particles-bg');
-const ctx=canvas.getContext('2d');
-let W,H,particles=[];
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
-resize();window.addEventListener('resize',resize);
-class Particle{
-  constructor(){this.reset()}
-  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.5+0.5;this.vx=(Math.random()-0.5)*0.3;this.vy=(Math.random()-0.5)*0.3;this.alpha=Math.random()*0.4+0.1}
-  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(6,182,212,${this.alpha})`;ctx.fill()}
-}
-for(let i=0;i<80;i++)particles.push(new Particle());
-function animParticles(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{p.update();p.draw()});
-  // lines
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const d=Math.hypot(particles[i].x-particles[j].x,particles[i].y-particles[j].y);
-      if(d<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(6,182,212,${0.08*(1-d/120)})`;ctx.lineWidth=0.5;ctx.stroke()}
-    }
+var canvas = document.getElementById('particles-bg');
+if (canvas) {
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [];
+
+  function resizeCanvas() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-  requestAnimationFrame(animParticles);
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function Particle() { this.reset(); }
+  Particle.prototype.reset = function() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.alpha = Math.random() * 0.4 + 0.1;
+  };
+  Particle.prototype.update = function() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  };
+  Particle.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(6,182,212,' + this.alpha + ')';
+    ctx.fill();
+  };
+
+  for (var i = 0; i < 80; i++) particles.push(new Particle());
+
+  function animParticles() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(6,182,212,' + (0.08 * (1 - d/120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animParticles);
+  }
+  animParticles();
 }
-animParticles();
 
 // ===================== SEARCH =====================
-document.getElementById('search').addEventListener('keyup',function(){
-  const f=this.value.toLowerCase();
-  document.querySelectorAll('.app-card').forEach(c=>{
-    c.style.display=c.innerText.toLowerCase().includes(f)?'block':'none';
+var searchInput = document.getElementById('search');
+if (searchInput) {
+  searchInput.addEventListener('keyup', function() {
+    var filter = this.value.toLowerCase();
+    var cards = document.querySelectorAll('.app-card');
+    for (var i = 0; i < cards.length; i++) {
+      var text = cards[i].innerText.toLowerCase();
+      cards[i].style.display = text.includes(filter) ? 'block' : 'none';
+    }
   });
-});
+}
 
 // ===================== PAGE ROUTING =====================
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  // re-trigger reveals
-  setTimeout(triggerReveals,100);
+function showPage(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active');
+  }
+  var target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(triggerReveals, 100);
 }
-function scrollToApps(){
-  setTimeout(()=>{
-    const el=document.getElementById('apps-section');
-    if(el)el.scrollIntoView({behavior:'smooth'});
-  },200);
+
+function scrollToApps() {
+  setTimeout(function() {
+    var el = document.getElementById('apps-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 200);
 }
 
 // ===================== REVEAL ON SCROLL =====================
-function triggerReveals(){
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
-    const r=el.getBoundingClientRect();
-    if(r.top<window.innerHeight-60)el.classList.add('visible');
-  });
+function triggerReveals() {
+  var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  for (var i = 0; i < els.length; i++) {
+    var rect = els[i].getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      els[i].classList.add('visible');
+    }
+  }
 }
-window.addEventListener('scroll',triggerReveals);
+window.addEventListener('scroll', triggerReveals);
 triggerReveals();
 
-// ===================== HERO COUNTER ANIM =====================
-function animateHeroCounters(){
-  const targets=[{id:'cnt1',val:'2.4M+'},{id:'cnt2',val:'1.2M+'},{id:'cnt3',val:'4+'},{id:'cnt4',val:'150+'}];
-  targets.forEach((t,i)=>{
-    setTimeout(()=>{
-      let nums=t.val.replace(/[^0-9.]/g,'');
-      let suffix=t.val.replace(/[0-9.]/g,'');
-      let n=parseFloat(nums),cur=0,step=n/40;
-      const el=document.getElementById(t.id);
-      const iv=setInterval(()=>{
-        cur+=step;if(cur>=n){cur=n;clearInterval(iv)}
-        el.textContent=(cur%1===0?cur:cur.toFixed(1))+suffix;
-      },40);
-    },i*200+2100);
+// ===================== HERO COUNTERS =====================
+function animateHeroCounters() {
+  var targets = [
+    { id: 'cnt1', display: '2.4M+' },
+    { id: 'cnt2', display: '1.2M+' },
+    { id: 'cnt3', display: '4+' },
+    { id: 'cnt4', display: '150+' }
+  ];
+  targets.forEach(function(t, i) {
+    setTimeout(function() {
+      var el = document.getElementById(t.id);
+      if (!el) return;
+      var num = parseFloat(t.display);
+      var suffix = t.display.replace(/[0-9.]/g, '');
+      var cur = 0, step = num / 40;
+      var iv = setInterval(function() {
+        cur += step;
+        if (cur >= num) { cur = num; clearInterval(iv); }
+        el.textContent = (cur % 1 === 0 ? Math.floor(cur) : cur.toFixed(1)) + suffix;
+      }, 40);
+    }, i * 200 + 2100);
   });
 }
 animateHeroCounters();
 
-// ===================== STATS COUNTER =====================
-function animCount(el){
-  const target=parseInt(el.dataset.target);
-  let cur=0,step=Math.ceil(target/60);
-  const iv=setInterval(()=>{
-    cur+=step;if(cur>=target){cur=target;clearInterval(iv)}
-    el.textContent=cur>=1000?(cur>=1000000?(cur/1000000).toFixed(1)+'M+':(cur/1000).toFixed(0)+'K+'):cur+(el.dataset.target==='99'?'%':el.dataset.target==='150'?'+':'');
-  },30);
-  el.dataset.counted='1';
+// ===================== STATS COUNTERS =====================
+function animCount(el) {
+  var target = parseInt(el.getAttribute('data-target'));
+  var cur = 0, step = Math.ceil(target / 60);
+  el.setAttribute('data-counted', '1');
+  var iv = setInterval(function() {
+    cur += step;
+    if (cur >= target) { cur = target; clearInterval(iv); }
+    if (cur >= 1000000) {
+      el.textContent = (cur / 1000000).toFixed(1) + 'M+';
+    } else if (cur >= 1000) {
+      el.textContent = Math.floor(cur / 1000) + 'K+';
+    } else if (target === 99) {
+      el.textContent = cur + '%';
+    } else if (target === 150) {
+      el.textContent = cur + '+';
+    } else {
+      el.textContent = cur;
+    }
+  }, 30);
 }
-const statObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting&&!e.target.dataset.counted)animCount(e.target);
-  });
-},{threshold:0.3});
-document.querySelectorAll('.stat-item .num').forEach(n=>statObs.observe(n));
 
-// ===================== MODAL DATA =====================
-const appData={
-  capcut:{icon:'🎬',title:'CapCut Pro',ver:'v11.9.0',size:'198 MB',date:'Apr 1, 2026',rating:'⭐ 4.9',desc:'CapCut Pro unlocked gives you access to all premium filters, effects, auto-captions, background removal, chroma key, and multi-layer editing. No watermark, no export limit. The #1 video editing app used by 600M+ creators worldwide.',url:'page/capcut.html'},
-  inshot:{icon:'✂️',title:'InShot Pro',ver:'v2.1.4',size:'87 MB',date:'Mar 29, 2026',rating:'⭐ 4.8',desc:'InShot Pro removes all watermarks and unlocks every premium filter, transition, music track, and video speed control. Perfect for Instagram Reels, TikTok, and YouTube Shorts creators.',url:'page/inshot.html'},
-  picsart:{icon:'🎨',title:'PicsArt Gold',ver:'v24.5.0',size:'145 MB',date:'Mar 25, 2026',rating:'⭐ 4.9',desc:'PicsArt Gold fully unlocked gives you access to 60,000+ stickers, AI-powered tools, premium templates, background remover, and the full effects library. Zero ads, full creative freedom.',url:'page/picsart.html'},
-  remini:{icon:'✨',title:'Remini Pro',ver:'v3.7.6',size:'62 MB',date:'Mar 20, 2026',rating:'⭐ 4.7',desc:'Remini Pro uses advanced AI to restore, enhance, and upscale any photo. Remove blur, restore old photos, generate HD portraits, and enhance face details with stunning clarity.',url:'page/remini.html'},
+if (typeof IntersectionObserver !== 'undefined') {
+  var statObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !e.target.getAttribute('data-counted')) {
+        animCount(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.stat-item .num').forEach(function(n) {
+    statObs.observe(n);
+  });
+}
+
+// ===================== APP DATA =====================
+// ⬇️ PUT YOUR MEDIAFIRE LINKS HERE ⬇️
+var appData = {
+  capcut: {
+    icon: '🎬',
+    title: 'CapCut Pro',
+    ver: 'v11.9.0',
+    size: '198 MB',
+    date: 'Apr 1, 2026',
+    rating: '⭐ 4.9',
+    desc: 'CapCut Pro gives you all premium filters, effects, auto-captions, AI background removal, chroma key, and multi-layer editing. No watermark. No export limit. Used by 600M+ creators.',
+    url: 'page/capcut.html'   // ← This is correct — goes to your capcut.html page
+  },
+  inshot: {
+    icon: '✂️',
+    title: 'InShot Pro',
+    ver: 'v2.1.4',
+    size: '87 MB',
+    date: 'Mar 29, 2026',
+    rating: '⭐ 4.8',
+    desc: 'InShot Pro removes all watermarks and unlocks every premium filter, transition, music track, and video speed control. Perfect for Instagram Reels, TikTok, and YouTube Shorts.',
+    url: 'page/inshot.html'
+  },
+  picsart: {
+    icon: '🎨',
+    title: 'PicsArt Gold',
+    ver: 'v24.5.0',
+    size: '145 MB',
+    date: 'Mar 25, 2026',
+    rating: '⭐ 4.9',
+    desc: 'PicsArt Gold fully unlocked gives you 60,000+ stickers, AI-powered tools, premium templates, background remover, and the full effects library. Zero ads, full creative freedom.',
+    url: 'page/picsart.html'
+  },
+  remini: {
+    icon: '✨',
+    title: 'Remini Pro',
+    ver: 'v3.7.6',
+    size: '62 MB',
+    date: 'Mar 20, 2026',
+    rating: '⭐ 4.7',
+    desc: 'Remini Pro uses advanced AI to restore, enhance, and upscale any photo. Remove blur, restore old photos, generate HD portraits, and enhance face details with stunning clarity.',
+    url: 'page/remini.html'
+  }
 };
-let currentApp=null;
-function openModal(id){
-  const d=appData[id];currentApp=d;
-  document.getElementById('modal-icon').textContent=d.icon;
-  document.getElementById('modal-title').textContent=d.title;
-  document.getElementById('modal-ver').textContent=d.ver;
-  document.getElementById('modal-size').textContent=d.size;
-  document.getElementById('modal-date').textContent=d.date;
-  document.getElementById('modal-rating').textContent=d.rating;
-  document.getElementById('modal-desc').textContent=d.desc;
-  document.getElementById('modal-btn').textContent='⬇️ DOWNLOAD NOW — FREE';
-  document.getElementById('modal-btn').disabled=false;
-  document.getElementById('progress-bar').style.display='none';
-  document.getElementById('progress-fill').style.width='0';
+
+var currentApp = null;
+
+// ===================== OPEN MODAL =====================
+function openModal(id) {
+  var d = appData[id];
+  if (!d) { alert('App not found: ' + id); return; }
+  currentApp = d;
+
+  document.getElementById('modal-icon').textContent = d.icon;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-ver').textContent = d.ver;
+  document.getElementById('modal-size').textContent = d.size;
+  document.getElementById('modal-date').textContent = d.date;
+  document.getElementById('modal-rating').textContent = d.rating;
+  document.getElementById('modal-desc').textContent = d.desc;
+
+  var btn = document.getElementById('modal-btn');
+  btn.textContent = '⬇️ VIEW & DOWNLOAD — FREE';
+  btn.disabled = false;
+
+  var pb = document.getElementById('progress-bar');
+  var pf = document.getElementById('progress-fill');
+  if (pb) pb.style.display = 'none';
+  if (pf) pf.style.width = '0';
+
   document.getElementById('modal').classList.add('open');
 }
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 
-function fakeDownload(){
-  const btn=document.getElementById('modal-btn');
-  const pb=document.getElementById('progress-bar');
-  const pf=document.getElementById('progress-fill');
-  btn.textContent='🔄 Preparing Download...';
-  btn.disabled=true;
-  pb.style.display='block';
-  let w=0;
-  const iv=setInterval(()=>{
-    w+=Math.random()*4+1;
-    if(w>=100){w=100;clearInterval(iv);
-      setTimeout(()=>{
+// ===================== CLOSE MODAL =====================
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+// Click outside modal to close
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ===================== FAKE DOWNLOAD (goes to app page) =====================
+function fakeDownload() {
+  var btn = document.getElementById('modal-btn');
+  var pb = document.getElementById('progress-bar');
+  var pf = document.getElementById('progress-fill');
+
+  btn.textContent = '🔄 Loading...';
+  btn.disabled = true;
+  if (pb) pb.style.display = 'block';
+
+  var w = 0;
+  var iv = setInterval(function() {
+    w += Math.random() * 5 + 2;
+    if (w >= 100) {
+      w = 100;
+      clearInterval(iv);
+      if (pf) pf.style.width = '100%';
+      btn.textContent = '✅ Opening Page...';
+      setTimeout(function() {
         closeModal();
-        showToast('✅ Redirecting to download page...');
-        setTimeout(()=>{if(currentApp)window.location.href=currentApp.url},1000);
-      },400);
+        showToast('✅ Opening download page...');
+        setTimeout(function() {
+          if (currentApp) window.location.href = currentApp.url;
+        }, 800);
+      }, 300);
+      return;
     }
-    pf.style.width=w+'%';
-    btn.textContent=`⬇️ Downloading... ${Math.floor(w)}%`;
-  },80);
+    if (pf) pf.style.width = w + '%';
+    btn.textContent = '⬇️ Loading... ' + Math.floor(w) + '%';
+  }, 60);
 }
 
 // ===================== TOAST =====================
-function showToast(msg,icon=''){
-  const t=document.getElementById('toast');
-  document.getElementById('toast-msg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  var tm = document.getElementById('toast-msg');
+  if (tm) tm.textContent = msg;
+  if (t) {
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 3500);
+  }
 }
 
 // ===================== CONTACT FORM =====================
-function fakeSubmit(){
+function fakeSubmit() {
   showToast('📨 Message sent! We\'ll reply within 24 hours.');
 }
 
 // ===================== FAQ =====================
-function toggleFaq(el){
-  const ans=el.nextElementSibling;
-  const arr=el.querySelector('.faq-arr');
-  ans.classList.toggle('open');
-  arr.classList.toggle('open');
+function toggleFaq(el) {
+  var ans = el.nextElementSibling;
+  var arr = el.querySelector('.faq-arr');
+  if (ans) ans.classList.toggle('open');
+  if (arr) arr.classList.toggle('open');
 }
 
 // ===================== LIVE BAR =====================
-function updateLiveBar(){
-  const users=Math.floor(Math.random()*300+1600);
-  const dl=Math.floor(Math.random()*8+1);
-  const countries=Math.floor(Math.random()*15+40);
-  document.getElementById('live-users').textContent=`${users.toLocaleString()} users online now`;
-  document.getElementById('live-dl').textContent=`${dl} downloads in the last minute`;
-  document.getElementById('live-country').textContent=`Users active from ${countries} countries`;
+function updateLiveBar() {
+  var users = Math.floor(Math.random() * 300 + 1600);
+  var dl = Math.floor(Math.random() * 8 + 1);
+  var countries = Math.floor(Math.random() * 15 + 40);
+  var u = document.getElementById('live-users');
+  var d = document.getElementById('live-dl');
+  var c = document.getElementById('live-country');
+  if (u) u.textContent = users.toLocaleString() + ' users online now';
+  if (d) d.textContent = dl + ' downloads in the last minute';
+  if (c) c.textContent = 'Users active from ' + countries + ' countries';
 }
-setInterval(updateLiveBar,6000);
-</script>
+setInterval(updateLiveBar, 6000);
+
+      </script>
 </body>
 </html>
