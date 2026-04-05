@@ -3,8 +3,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APK Hub Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   background: linear-gradient(135deg,#020617,#0f172a);
@@ -107,6 +114,17 @@ nav a{
 
 .btn:hover{background:#22d3ee}
 
+/* ABOUT SECTION */
+#about{
+  padding:40px;
+  text-align:center;
+  max-width:800px;
+  margin:auto;
+  background:#1e293b;
+  border-radius:20px;
+}
+
+/* FOOTER */
 .footer{
   text-align:center;
   padding:30px;
@@ -125,35 +143,81 @@ nav a{
   to{opacity:1;transform:translateY(0)}
 }
 
-</style></head><body><header>
+</style>
+</head>
+
+<body>
+
+<header>
 <div class="logo">APK Hub Pro 🚀</div>
 <nav>
-<a href="#">Home</a>
-<a href="#">Apps</a>
-<a href="#">About</a>
+<a href="#home">Home</a>
+<a href="#apps">Apps</a>
+<a href="#about">About</a>
 </nav>
-</header><section class="hero">
+</header>
+
+<!-- HOME -->
+<section class="hero" id="home">
 <h1>Download Premium APKs</h1>
-<p>Fast • Safe • Direct Download</p><div class="search">
+<p>Fast • Safe • Direct Download</p>
+
+<div class="search">
 <input type="text" id="search" placeholder="Search apps...">
 </div>
-</section><div class="container" id="appList"><div class="card fade">
+</section>
+
+<!-- APPS -->
+<div class="container" id="apps">
+
+<div class="card fade">
 <img src="images/capcut.png">
-<h2>CAPCUT PRO 📥 </h2>
+<h2>CAPCUT PRO 📥</h2>
 <a class="btn" href="page/capcut.html">View</a>
-</div><div class="card fade">
+</div>
+
+<div class="card fade">
 <img src="images/inshot.png">
-<h2>INSHOT PRO 📥 </h2>
+<h2>INSHOT PRO 📥</h2>
 <a class="btn" href="page/inshot.html">View</a>
-</div><div class="card fade">
+</div>
+
+<div class="card fade">
 <img src="images/picsart.png">
-<h2>PICSART PRO 📥 </h2>
+<h2>PICSART PRO 📥</h2>
 <a class="btn" href="page/picsart.html">View</a>
-</div><div class="card fade">
+</div>
+
+<div class="card fade">
 <img src="images/remini.png">
-<h2>REMINI PRO 📥 </h2>
+<h2>REMINI PRO 📥</h2>
 <a class="btn" href="page/remini.html">View</a>
-</div></div><div class="footer">© 2026 APK Hub Pro | All Rights Reserved</div><script>
+</div>
+
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About Us</h2>
+
+<p>
+APK Hub Pro ek modern platform hai jahan se aap premium apps easily download kar sakte hain.
+Hum users ko fast, secure aur simple downloading experience dene ke liye design kiya gaya hai.
+</p>
+
+<p>
+Yahan aapko popular apps jaise CapCut, InShot, PicsArt aur Remini ke latest versions milte hain.
+Hamari website ka goal hai ke har user bina kisi confusion ke apni required app easily download kar sake.
+</p>
+
+<p>
+Hum continuously new apps aur updates add karte rehte hain taki aapko best experience mile.
+</p>
+</section>
+
+<div class="footer">© 2026 APK Hub Pro | All Rights Reserved</div>
+
+<script>
 const search=document.getElementById('search');
 search.addEventListener('keyup',()=>{
 let filter=search.value.toLowerCase();
@@ -163,5 +227,7 @@ let text=card.innerText.toLowerCase();
 card.style.display=text.includes(filter)?'block':'none';
 });
 });
-</script></body>
-</html>
+</script>
+
+</body>
+  </html>
