@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APK Hub Pro — Premium Apps, Zero Cost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020617;--card:#0d1526;--cyan:#06b6d4;--purple:#8b5cf6;--pink:#f43f5e;--gold:#f59e0b;--green:#10b981;--glow:0 0 30px rgba(6,182,212,0.5);--glow2:0 0 60px rgba(6,182,212,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+#particles-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;pointer-events:none;z-index:1}
+
+/* HEADER */
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(2,6,23,0.95);backdrop-filter:blur(20px);position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(6,182,212,0.2)}
+.logo{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;text-decoration:none}
+.logo em{-webkit-text-fill-color:var(--pink);color:var(--pink);font-style:normal}
+nav{display:flex;align-items:center;gap:4px}
+nav a{padding:8px 14px;text-decoration:none;color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:6px;transition:all 0.3s}
+nav a:hover{color:#fff;background:rgba(6,182,212,0.1)}
+.nav-badge{background:var(--pink);color:#fff;font-size:9px;padding:2px 6px;border-radius:10px;margin-left:4px}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;background:rgba(6,182,212,0.08);border-bottom:1px solid rgba(6,182,212,0.15);padding:10px 0;position:relative;z-index:2}
+.ticker{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
+.ticker-item{padding:0 36px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--cyan);opacity:0.8;text-transform:uppercase}
+.ticker-dot{color:var(--pink);padding:0 10px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 20px;position:relative;overflow:hidden;z-index:2}
+.hero-grid{position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(6,182,212,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,0.05) 1px,transparent 1px);background-size:50px 50px;animation:gridMove 20s linear infinite;pointer-events:none}
+@keyframes gridMove{from{transform:translateY(0)}to{transform:translateY(50px)}}
+.hero-badge{background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.4);color:var(--cyan);padding:6px 20px;border-radius:30px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;animation:fadeDown 0.8s ease both}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(36px,7vw,88px);font-weight:900;line-height:1;margin-bottom:20px;animation:fadeDown 1s 0.15s ease both}
+.hero h1 span{display:block;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:18px;opacity:0.6;max-width:580px;margin-bottom:40px;animation:fadeDown 1s 0.3s ease both;line-height:1.6}
+.hero-stats{display:flex;gap:40px;margin-bottom:44px;flex-wrap:wrap;justify-content:center;animation:fadeDown 1s 0.45s ease both}
+.hstat{text-align:center}
+.hstat-num{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--cyan)}
+.hstat-label{font-size:12px;opacity:0.5;letter-spacing:2px;text-transform:uppercase}
+.search-wrap{position:relative;width:100%;max-width:500px;animation:fadeDown 1s 0.6s ease both}
+.search-wrap input{width:100%;padding:16px 56px 16px 24px;border-radius:50px;border:1px solid rgba(6,182,212,0.3);background:rgba(13,21,38,0.9);color:#fff;font-family:'Rajdhani',sans-serif;font-size:16px;outline:none;transition:all 0.3s}
+.search-wrap input:focus{border-color:var(--cyan);box-shadow:var(--glow)}
+.search-wrap input::placeholder{color:rgba(255,255,255,0.35)}
+.search-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:20px;opacity:0.4}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION HEADER */
+.section-header{text-align:center;padding:60px 20px 40px;position:relative;z-index:2}
+.section-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;padding:4px 16px;border:1px solid rgba(6,182,212,0.3);border-radius:20px}
+.section-header h2{font-family:'Orbitron',sans-serif;font-size:clamp(24px,4vw,46px);font-weight:900;margin-bottom:10px}
+.section-header p{opacity:0.5;max-width:500px;margin:0 auto;line-height:1.6;font-size:15px}
+.line-accent{width:60px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));margin:14px auto 0;border-radius:2px}
+
+/* HOW IT WORKS */
+.how{padding:0 40px 60px;position:relative;z-index:2}
+.steps{display:flex;justify-content:center;flex-wrap:wrap;max-width:960px;margin:0 auto}
+.step{text-align:center;padding:20px;flex:1;min-width:170px}
+.step-num{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;margin:0 auto 14px;box-shadow:var(--glow)}
+.step h3{font-size:14px;font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.step p{font-size:12px;opacity:0.5;max-width:130px;margin:0 auto;line-height:1.6}
+
+/* APP CARDS */
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;padding:0 40px 60px;position:relative;z-index:2;max-width:1400px;margin:0 auto}
+.app-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:30px 24px;text-align:center;transition:all 0.4s cubic-bezier(0.23,1,0.32,1);position:relative;overflow:hidden}
+.app-card::after{content:'';position:absolute;top:-100%;left:-60%;width:40%;height:300%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);transform:skewX(-20deg);transition:0.7s;pointer-events:none}
+.app-card:hover::after{left:160%}
+.app-card:hover{transform:translateY(-10px);border-color:rgba(6,182,212,0.3);box-shadow:0 28px 56px rgba(0,0,0,0.5),var(--glow2)}
+.app-icon{width:82px;height:82px;border-radius:20px;margin:0 auto 14px;background:rgba(6,182,212,0.08);display:flex;align-items:center;justify-content:center;font-size:42px;border:1px solid rgba(6,182,212,0.12)}
+.app-icon img{width:100%;height:100%;object-fit:cover;border-radius:18px}
+.app-category{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;opacity:0.7}
+.app-card h2{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.app-rating{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:8px}
+.stars{color:var(--gold);font-size:13px}
+.rating-num{font-size:12px;opacity:0.55}
+.app-meta{display:flex;justify-content:center;gap:14px;margin-bottom:14px;font-size:11px;opacity:0.45}
+.app-badges{display:flex;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.badge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:700;letter-spacing:1px}
+.badge-pro{background:rgba(244,63,94,0.2);color:var(--pink);border:1px solid rgba(244,63,94,0.3)}
+.badge-safe{background:rgba(16,185,129,0.2);color:var(--green);border:1px solid rgba(16,185,129,0.3)}
+.badge-new{background:rgba(139,92,246,0.2);color:var(--purple);border:1px solid rgba(139,92,246,0.3)}
+
+/* VIEW APP BUTTON — plain anchor tag, zero JavaScript, always works */
+.btn-view{display:block;padding:13px 28px;border-radius:50px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;width:100%;text-align:center;position:relative;z-index:5}
+.btn-view:hover{transform:scale(1.04);box-shadow:var(--glow);color:#fff}
+.download-count{font-size:11px;opacity:0.4;margin-top:10px}
+
+/* FEATURES */
+.features{padding:0 40px 60px;position:relative;z-index:2}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+.feat-card{background:rgba(13,21,38,0.6);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:28px 24px;transition:all 0.3s}
+.feat-card:hover{border-color:rgba(6,182,212,0.3);transform:translateY(-6px);background:rgba(6,182,212,0.05)}
+.feat-icon{font-size:36px;margin-bottom:14px;display:block}
+.feat-card h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.feat-card p{font-size:13px;opacity:0.5;line-height:1.6}
+
+/* STATS */
+.stats-bar{background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(139,92,246,0.08));border-top:1px solid rgba(6,182,212,0.12);border-bottom:1px solid rgba(6,182,212,0.12);padding:50px 40px;position:relative;z-index:2}
+.stats-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:30px;max-width:960px;margin:0 auto;text-align:center}
+.stat-num{font-family:'Orbitron',sans-serif;font-size:34px;font-weight:900;color:var(--cyan);display:block}
+.stat-lbl{font-size:12px;opacity:0.45;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+/* REVIEWS */
+.reviews{padding:0 40px 80px;position:relative;z-index:2}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+.review-card{background:rgba(13,21,38,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;transition:all 0.3s}
+.review-card:hover{border-color:rgba(6,182,212,0.2);transform:translateY(-4px)}
+.review-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:15px;font-weight:900;flex-shrink:0}
+.review-name{font-weight:700;font-size:14px}
+.review-date{font-size:11px;opacity:0.35;margin-top:2px}
+.review-stars{color:var(--gold);font-size:13px;margin-bottom:8px}
+.review-text{font-size:13px;opacity:0.6;line-height:1.7}
+.review-app{display:inline-block;margin-top:10px;font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(6,182,212,0.1);color:var(--cyan);border:1px solid rgba(6,182,212,0.2)}
+.verified{color:var(--green);font-size:11px;margin-left:5px}
+
+/* ABOUT */
+.about-section{padding:0 40px 80px;position:relative;z-index:2}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto}
+.about-block{background:rgba(13,21,38,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:30px;transition:all 0.3s}
+.about-block:hover{border-color:rgba(6,182,212,0.2)}
+.about-block h3{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;color:var(--cyan);letter-spacing:1px}
+.about-block p{font-size:14px;opacity:0.6;line-height:1.8;margin-bottom:10px}
+.about-block p:last-child{margin-bottom:0}
+
+/* CONTACT */
+.contact-section{padding:0 40px 80px;position:relative;z-index:2}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+.contact-form-box{background:rgba(13,21,38,0.8);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:30px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.5;margin-bottom:7px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;background:rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;transition:all 0.3s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--cyan);box-shadow:0 0 18px rgba(6,182,212,0.2)}
+.form-group textarea{height:110px;resize:none}
+.form-group select option{background:#0a0f1e}
+.btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s}
+.btn-submit:hover{transform:scale(1.02);box-shadow:var(--glow)}
+.contact-info-box{display:flex;flex-direction:column;gap:14px}
+.info-card{background:rgba(13,21,38,0.8);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:20px;transition:all 0.3s;display:flex;align-items:flex-start;gap:14px}
+.info-card:hover{border-color:rgba(6,182,212,0.3);transform:translateX(5px)}
+.info-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.info-title{font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:3px;color:var(--cyan)}
+.info-val{font-size:13px;opacity:0.5;line-height:1.6}
+.info-val a{color:var(--cyan);text-decoration:none}
+
+/* FOOTER */
+footer{background:#020617;border-top:1px solid rgba(255,255,255,0.06);padding:54px 40px 30px;position:relative;z-index:2}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:36px;max-width:1200px;margin:0 auto 36px}
+.footer-brand p{font-size:12px;opacity:0.35;line-height:1.8;max-width:210px;margin-top:10px}
+.footer-col h4{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:14px}
+.footer-col a{display:block;font-size:13px;opacity:0.45;text-decoration:none;color:#fff;margin-bottom:9px;transition:all 0.2s}
+.footer-col a:hover{opacity:1;color:var(--cyan);padding-left:4px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.06);max-width:1200px;margin:0 auto}
+.footer-bottom p{font-size:12px;opacity:0.3}
+.footer-badges{display:flex;gap:8px}
+.fbadge{font-size:10px;padding:3px 11px;border-radius:20px;background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);letter-spacing:1px;text-transform:uppercase}
+
+/* LIVE BAR */
+.live-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(6,182,212,0.15);padding:8px 40px;display:flex;justify-content:center;gap:36px;z-index:999;font-size:12px;flex-wrap:wrap}
+.live-item{display:flex;align-items:center;gap:7px;opacity:0.55}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
+
+/* TOAST */
+.toast{position:fixed;bottom:60px;right:24px;background:rgba(13,21,38,0.97);border:1px solid rgba(6,182,212,0.4);padding:14px 22px;border-radius:12px;font-size:14px;font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.4s cubic-bezier(0.23,1,0.32,1);backdrop-filter:blur(20px)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:all 0.7s cubic-bezier(0.23,1,0.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{padding:14px 18px}
+  nav a{padding:6px 9px;font-size:11px}
+  .apps-grid,.features,.reviews,.about-section,.contact-section{padding-left:18px;padding-right:18px}
+  .about-grid,.contact-inner{grid-template-columns:1fr}
+  .stats-bar{padding:36px 18px}
+  .how{padding:0 18px 50px}
+  footer{padding:40px 18px 70px}
+  .live-bar{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles-bg"></canvas>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="index.html">APK<em>HUB</em> PRO 🚀</a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#apps">Apps <span class="nav-badge">4</span></a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">🔥 CapCut Pro v11.9 Now Available</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">✅ 100% Safe &amp; Verified APKs</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">⚡ 2.4M+ Downloads This Month</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🌟 InShot Pro Updated — No Watermark</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🔐 SSL Encrypted Downloads</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">📱 Android 5.0+ Supported</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🎨 PicsArt Premium Fully Unlocked</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🤖 AI Virus Scan on Every File</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🔥 CapCut Pro v11.9 Now Available</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">✅ 100% Safe &amp; Verified APKs</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">⚡ 2.4M+ Downloads This Month</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🌟 InShot Pro Updated — No Watermark</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🔐 SSL Encrypted Downloads</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">📱 Android 5.0+ Supported</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🎨 PicsArt Premium Fully Unlocked</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">🤖 AI Virus Scan on Every File</span><span class="ticker-dot">●</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">🛡️ Verified &amp; 100% Safe Platform</div>
+  <h1>Download<br><span>Premium APKs</span></h1>
+  <p class="hero-sub">The world's most trusted source for premium Android apps. No subscriptions, no ads — just pure performance.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">2.4M+</div><div class="hstat-label">Downloads</div></div>
+    <div class="hstat"><div class="hstat-num">1.2M+</div><div class="hstat-label">Happy Users</div></div>
+    <div class="hstat"><div class="hstat-num">4+</div><div class="hstat-label">Apps</div></div>
+    <div class="hstat"><div class="hstat-num">150+</div><div class="hstat-label">Countries</div></div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search apps — CapCut, InShot, PicsArt...">
+    <span class="search-icon">🔍</span>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="section-header reveal">
+  <span class="section-tag">Simple Process</span>
+  <h2>How It Works</h2>
+  <p>Four simple steps to get any premium app free</p>
+  <div class="line-accent"></div>
+</div>
+<div class="how">
+  <div class="steps">
+    <div class="step reveal"><div class="step-num">01</div><h3>Search</h3><p>Find your app from our curated library</p></div>
+    <div class="step reveal"><div class="step-num">02</div><h3>Verify</h3><p>Every APK is AI scanned &amp; verified safe</p></div>
+    <div class="step reveal"><div class="step-num">03</div><h3>Download</h3><p>One-click via secure MediaFire CDN</p></div>
+    <div class="step reveal"><div class="step-num">04</div><h3>Enjoy</h3><p>Full premium features — completely free</p></div>
+  </div>
+</div>
+
+<!-- APPS -->
+<div class="section-header reveal" id="apps">
+  <span class="section-tag">Featured Apps</span>
+  <h2>Premium Apps</h2>
+  <p>Hand-picked, verified and always up-to-date</p>
+  <div class="line-accent"></div>
+</div>
+
+<div class="apps-grid" id="appsGrid">
+
+  <!-- CAPCUT — clicking goes directly to page/capcut.html -->
+  <div class="app-card reveal" data-name="capcut pro video editing">
+    <div class="app-icon">
+      <img src="images/capcut.png" alt="CapCut" onerror="this.parentNode.innerHTML='🎬'">
+    </div>
+    <div class="app-category">Video Editing</div>
+    <h2>CAPCUT PRO</h2>
+    <div class="app-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-num">4.9 (128K)</span>
+    </div>
+    <div class="app-meta">
+      <span>📦 198 MB</span>
+      <span>v11.9.0</span>
+    </div>
+    <div class="app-badges">
+      <span class="badge badge-pro">PRO</span>
+      <span class="badge badge-safe">SAFE</span>
+      <span class="badge badge-new">UPDATED</span>
+    </div>
+    <a class="btn-view" href="page/capcut.html">View App 📥</a>
+    <div class="download-count">⬇️ 892,441 downloads</div>
+  </div>
+
+  <!-- INSHOT -->
+  <div class="app-card reveal" data-name="inshot pro video photo editor">
+    <div class="app-icon">
+      <img src="images/inshot.png" alt="InShot" onerror="this.parentNode.innerHTML='✂️'">
+    </div>
+    <div class="app-category">Video &amp; Photo</div>
+    <h2>INSHOT PRO</h2>
+    <div class="app-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-num">4.8 (95K)</span>
+    </div>
+    <div class="app-meta">
+      <span>📦 87 MB</span>
+      <span>v2.1.4</span>
+    </div>
+    <div class="app-badges">
+      <span class="badge badge-pro">PRO</span>
+      <span class="badge badge-safe">SAFE</span>
+    </div>
+    <a class="btn-view" href="page/inshot.html">View App 📥</a>
+    <div class="download-count">⬇️ 641,082 downloads</div>
+  </div>
+
+  <!-- PICSART -->
+  <div class="app-card reveal" data-name="picsart gold photo editor art">
+    <div class="app-icon">
+      <img src="images/picsart.png" alt="PicsArt" onerror="this.parentNode.innerHTML='🎨'">
+    </div>
+    <div class="app-category">Photo Editing</div>
+    <h2>PICSART PRO</h2>
+    <div class="app-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-num">4.9 (201K)</span>
+    </div>
+    <div class="app-meta">
+      <span>📦 145 MB</span>
+      <span>v24.5</span>
+    </div>
+    <div class="app-badges">
+      <span class="badge badge-pro">PRO</span>
+      <span class="badge badge-safe">SAFE</span>
+      <span class="badge badge-new">HOT 🔥</span>
+    </div>
+    <a class="btn-view" href="page/picsart.html">View App 📥</a>
+    <div class="download-count">⬇️ 1,024,391 downloads</div>
+  </div>
+
+  <!-- REMINI -->
+  <div class="app-card reveal" data-name="remini pro ai photo enhance">
+    <div class="app-icon">
+      <img src="images/remini.png" alt="Remini" onerror="this.parentNode.innerHTML='✨'">
+    </div>
+    <div class="app-category">AI Photo</div>
+    <h2>REMINI PRO</h2>
+    <div class="app-rating">
+      <span class="stars">★★★★½</span>
+      <span class="rating-num">4.7 (73K)</span>
+    </div>
+    <div class="app-meta">
+      <span>📦 62 MB</span>
+      <span>v3.7.6</span>
+    </div>
+    <div class="app-badges">
+      <span class="badge badge-pro">PRO</span>
+      <span class="badge badge-safe">SAFE</span>
+    </div>
+    <a class="btn-view" href="page/remini.html">View App 📥</a>
+    <div class="download-count">⬇️ 487,229 downloads</div>
+  </div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="section-header reveal">
+  <span class="section-tag">Why Choose Us</span>
+  <h2>Platform Features</h2>
+  <p>Built for speed, security and simplicity</p>
+  <div class="line-accent"></div>
+</div>
+<div class="features">
+  <div class="features-grid">
+    <div class="feat-card reveal"><span class="feat-icon">🛡️</span><h3>AI Virus Scanner</h3><p>Every APK runs through 47 threat checks by our AI engine before listing.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">⚡</span><h3>Blazing Fast CDN</h3><p>Global CDN across 35 data centres delivers files at peak speed worldwide.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">🔓</span><h3>Full Premium Unlock</h3><p>No trial, no watermark, no expiry. All premium features permanently free.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">🔄</span><h3>Regular Updates</h3><p>New versions published within 24–48 hours of every official release.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">🌍</span><h3>Global Access</h3><p>Available in 150+ countries — no region locks, no geo-restrictions ever.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">💎</span><h3>Zero Cost Forever</h3><p>No hidden fees, no subscriptions. Premium apps free for everyone, always.</p></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="reveal"><span class="stat-num">2.4M+</span><span class="stat-lbl">Total Downloads</span></div>
+    <div class="reveal"><span class="stat-num">1.2M+</span><span class="stat-lbl">Active Users</span></div>
+    <div class="reveal"><span class="stat-num">99.9%</span><span class="stat-lbl">Uptime</span></div>
+    <div class="reveal"><span class="stat-num">150+</span><span class="stat-lbl">Countries</span></div>
+    <div class="reveal"><span class="stat-num">47</span><span class="stat-lbl">Security Checks</span></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="section-header reveal">
+  <span class="section-tag">User Reviews</span>
+  <h2>What People Say</h2>
+  <p>Trusted by millions of Android users worldwide</p>
+  <div class="line-accent"></div>
+</div>
+<div class="reviews">
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar">AK</div><div><div class="review-name">Ahmad Karimi <span class="verified">✔ Verified</span></div><div class="review-date">March 28, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Bhai yeh site ne meri zindagi badal di! CapCut Pro free mein mil gaya aur koi watermark bhi nahi. 10/10 recommend karunga sabko.</p>
+      <span class="review-app">CapCut Pro</span>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar" style="background:linear-gradient(135deg,#f43f5e,#8b5cf6)">SN</div><div><div class="review-name">Sofia Nguyen <span class="verified">✔ Verified</span></div><div class="review-date">March 25, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I was skeptical at first but this platform is LEGIT. PicsArt Gold fully unlocked, no ads, super fast download. This site is incredible!</p>
+      <span class="review-app">PicsArt Pro</span>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar" style="background:linear-gradient(135deg,#f59e0b,#10b981)">MR</div><div><div class="review-name">Mohammed Raza <span class="verified">✔ Verified</span></div><div class="review-date">March 22, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">InShot Pro downloaded in 8 seconds flat. No virus, no lag, all premium filters. Better than any paid app store!</p>
+      <span class="review-app">InShot Pro</span>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar" style="background:linear-gradient(135deg,#10b981,#06b6d4)">PK</div><div><div class="review-name">Priya Kapoor <span class="verified">✔ Verified</span></div><div class="review-date">March 19, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Remini Pro ka AI face enhancement unreal hai! APK Hub Pro se free mila. I tell all my friends about this. Best platform ever!</p>
+      <span class="review-app">Remini Pro</span>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar" style="background:linear-gradient(135deg,#8b5cf6,#f43f5e)">JL</div><div><div class="review-name">Jake Liu <span class="verified">✔ Verified</span></div><div class="review-date">March 15, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The AI virus scanner gives me full confidence. Downloaded 3 apps — all clean, all working perfectly. The download speed is insane. 🔥</p>
+      <span class="review-app">CapCut Pro</span>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-top"><div class="review-avatar" style="background:linear-gradient(135deg,#f43f5e,#f59e0b)">FA</div><div><div class="review-name">Fatima Al-Rashid <span class="verified">✔ Verified</span></div><div class="review-date">March 12, 2026</div></div></div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Main pehle bohot sari sites try kar chuki thi but yeh alag hai. Fast, safe, aur professional. APK Hub Pro is the GOAT! 👑</p>
+      <span class="review-app">PicsArt Pro</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-header reveal" id="about">
+  <span class="section-tag">Our Story</span>
+  <h2>About APK Hub Pro</h2>
+  <p>On a mission to make premium apps free for everyone</p>
+  <div class="line-accent"></div>
+</div>
+<div class="about-section">
+  <div class="about-grid">
+    <div class="about-block reveal">
+      <h3>🚀 Our Mission</h3>
+      <p>APK Hub Pro was founded in 2021 with one simple belief: premium apps should not be locked behind paywalls. We serve over 1.2 million active users monthly across 150+ countries.</p>
+      <p>Every APK is tested by our security team and AI scanner before going live. Zero compromises on safety.</p>
+    </div>
+    <div class="about-block reveal">
+      <h3>🔐 Our Security Promise</h3>
+      <p>Our multi-layered scanning pipeline runs every APK through 47 distinct security checks including malware detection, permission auditing, and code injection analysis.</p>
+      <p>We partner with leading cybersecurity firms. Our 99.98% clean-file record speaks for itself.</p>
+    </div>
+    <div class="about-block reveal">
+      <h3>📊 By The Numbers</h3>
+      <p>Since launch we've served over <strong style="color:var(--cyan)">2.4 million downloads</strong> to users in <strong style="color:var(--cyan)">150+ countries</strong>. Average speed is <strong style="color:var(--cyan)">32 MB/s</strong> via our global CDN.</p>
+    </div>
+    <div class="about-block reveal">
+      <h3>💡 Why We're Different</h3>
+      <p>Unlike other APK sites, we don't bombard you with pop-ups or fake buttons. Our interface is clean, our files are genuine, and our downloads are direct.</p>
+      <p>We manually verify every version — no shortcuts, no bots.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-header reveal" id="contact">
+  <span class="section-tag">Get In Touch</span>
+  <h2>Contact Us</h2>
+  <p>Have a question or DMCA request? We respond within 24 hours.</p>
+  <div class="line-accent"></div>
+</div>
+<div class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-form-box reveal">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Subject</label>
+        <select><option>General Inquiry</option><option>App Request</option><option>Bug Report</option><option>DMCA Notice</option><option>Partnership</option></select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Write your message here..."></textarea></div>
+      <button class="btn-submit" onclick="showToast('📨 Message sent! We will reply within 24 hours.')">SEND MESSAGE 🚀</button>
+    </div>
+    <div class="contact-info-box reveal">
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <div><div class="info-title">Email</div><div class="info-val"><a href="mailto:loloapksephire@gmail.com">loloapksephire@gmail.com</a></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">💬</div>
+        <div><div class="info-title">Telegram</div><div class="info-val">@APKHubPro — Reply within 2 hours</div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">⏰</div>
+        <div><div class="info-title">Support Hours</div><div class="info-val">Mon–Fri: 9AM–10PM PKT<br>Weekends: 10AM–6PM PKT</div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🌍</div>
+        <div><div class="info-title">Headquarters</div><div class="info-val">Lahore, Punjab, Pakistan 🇵🇰</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="index.html">APK<em>HUB</em> PRO</a>
+      <p>The world's most trusted platform for premium Android APKs. Free, fast, and forever secure.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#home">Home</a>
+      <a href="#apps">Apps</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Apps</h4>
+      <a href="page/capcut.html">CapCut Pro</a>
+      <a href="page/inshot.html">InShot Pro</a>
+      <a href="page/picsart.html">PicsArt Pro</a>
+      <a href="page/remini.html">Remini Pro</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#contact">Privacy Policy</a>
+      <a href="#contact">DMCA Notice</a>
+      <a href="#contact">Terms of Service</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:loloapksephire@gmail.com">loloapksephire@gmail.com</a>
+      <a href="#">Telegram: @APKHubPro</a>
+      <a href="#">Facebook Group</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 APK Hub Pro — All Rights Reserved. Made with ❤️ in Pakistan 🇵🇰</p>
+    <div class="footer-badges">
+      <span class="fbadge">SSL Secure</span>
+      <span class="fbadge">Ad Free</span>
+      <span class="fbadge">Virus Scanned</span>
+    </div>
+  </div>
+</footer>
+
+<!-- LIVE BAR -->
+<div class="live-bar">
+  <div class="live-item"><div class="live-dot"></div><span id="liveUsers">1,842 users online now</span></div>
+  <div class="live-item">⬇️ <span id="liveDl">3 downloads in the last minute</span></div>
+  <div class="live-item">🛡️ <span>All systems operational</span></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// PARTICLES
+(function(){
+  var c=document.getElementById('particles-bg');
+  var x=c.getContext('2d');
+  var W,H,P=[];
+  function rs(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  rs();window.addEventListener('resize',rs);
+  function Pt(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.4+0.4;this.vx=(Math.random()-0.5)*0.25;this.vy=(Math.random()-0.5)*0.25;this.a=Math.random()*0.3+0.05;}
+  Pt.prototype.up=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H){this.x=Math.random()*W;this.y=Math.random()*H;}};
+  Pt.prototype.dr=function(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(6,182,212,'+this.a+')';x.fill();};
+  for(var i=0;i<70;i++)P.push(new Pt());
+  function an(){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){P[i].up();P[i].dr();}
+    for(var i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){
+      var dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle='rgba(6,182,212,'+(0.07*(1-d/110))+')';x.lineWidth=0.5;x.stroke();}
+    }
+    requestAnimationFrame(an);
+  }
+  an();
+})();
+
+// SEARCH
+document.getElementById('searchInput').addEventListener('keyup',function(){
+  var f=this.value.toLowerCase();
+  var cards=document.querySelectorAll('#appsGrid .app-card');
+  for(var i=0;i<cards.length;i++){
+    cards[i].style.display=(cards[i].getAttribute('data-name')||'').includes(f)?'':'none';
+  }
+});
+
+// SCROLL REVEAL
+function reveal(){
+  var els=document.querySelectorAll('.reveal');
+  for(var i=0;i<els.length;i++){
+    if(els[i].getBoundingClientRect().top<window.innerHeight-60)
+      els[i].classList.add('visible');
+  }
+}
+window.addEventListener('scroll',reveal);
+reveal();
+
+// LIVE BAR
+setInterval(function(){
+  var u=document.getElementById('liveUsers');
+  var d=document.getElementById('liveDl');
+  if(u)u.textContent=(Math.floor(Math.random()*400)+1500).toLocaleString()+' users online now';
+  if(d)d.textContent=(Math.floor(Math.random()*9)+1)+' downloads in the last minute';
+},7000);
+
+// TOAST
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3500);
+}
+</script>
+</body>
+</html>
